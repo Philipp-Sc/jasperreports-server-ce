@@ -1,0 +1,11 @@
+Docker image: docker.io/bitnami/debian-base-buildpack:bullseye-r5
+Commands:
+apt-get update -y
+curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.43.1
+curl https://github.com/TIBCOSoftware/jasperreports-server-ce/archive/refs/tags/v8.2.0.zip --output /tmp/sources/jasperreports/jasperreports-8.2.0.zip
+unzip -q /tmp/sources/jasperreports/jasperreports-8.2.0.zip -d /bitnami/blacksmith-sandox/jasperreports-8.2.0.tmp
+cd /bitnami/blacksmith-sandox/jasperreports-8.2.0.tmp
+unzip  /bitnami/blacksmith-sandox/jasperreports-8.2.0/jasperserver.war -d /tmp/jasperreports
+zip  -r /bitnami/blacksmith-sandox/jasperreports-8.2.0/jasperserver.war .
+mkdir -p /opt/bitnami/jasperreports
+cp -r /bitnami/blacksmith-sandox/jasperreports-8.2.0/. /opt/bitnami/jasperreports
